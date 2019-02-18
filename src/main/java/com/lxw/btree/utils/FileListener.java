@@ -20,7 +20,11 @@ import java.io.*;
 @Slf4j
 public class FileListener extends FileAlterationListenerAdaptor {
 
-    private BplusTree bplusTree = new BplusTree(6);
+    private BplusTree allTree = new BplusTree(6);
+    private BplusTree docTree = new BplusTree(6);
+    private BplusTree musicTree = new BplusTree(6);
+    private BplusTree picTree = new BplusTree(6);
+    private BplusTree videoTree = new BplusTree(6);
     private int count = 0;
 
     /**
@@ -28,11 +32,11 @@ public class FileListener extends FileAlterationListenerAdaptor {
      */
     public void onFileCreate(File file) {
         log.info("[新建]:" + file.getAbsolutePath() + ",名称" + file.getName() + ",路径" + file.getPath());
-        bplusTree.insertOrUpdate(file.getAbsolutePath(), file);
+        allTree.insertOrUpdate(file.getAbsolutePath(), file);
         count++;
         System.out.println(count);
         if (count == 6) {
-            Object a = bplusTree.get("C:\\test\\ff.txt");
+            Object a = allTree.get("C:\\test\\ff.txt");
             System.out.println("哈哈哈");
             System.out.println(a);
         }
