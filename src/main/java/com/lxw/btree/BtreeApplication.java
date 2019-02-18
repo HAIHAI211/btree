@@ -24,7 +24,7 @@ public class BtreeApplication {
 
         System.out.println("*********************************启动成功*********************************");
         // 监控目录
-        String rootDir = "C:\\test";
+        String rootDir = "C:\\Users\\Administrator\\Desktop\\one";
         // 轮询间隔 5 秒
         long interval = TimeUnit.SECONDS.toMillis(1);
         // 创建过滤器

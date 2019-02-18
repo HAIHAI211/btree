@@ -25,20 +25,19 @@ public class FileListener extends FileAlterationListenerAdaptor {
     private BplusTree musicTree = new BplusTree(6);
     private BplusTree picTree = new BplusTree(6);
     private BplusTree videoTree = new BplusTree(6);
-    private int count = 0;
 
+
+    private int count0 = 0;
+    private int count1 = 0;
     /**
      * 文件创建执行
      */
     public void onFileCreate(File file) {
         log.info("[新建]:" + file.getAbsolutePath() + ",名称" + file.getName() + ",路径" + file.getPath());
-        allTree.insertOrUpdate(file.getAbsolutePath(), file);
-        count++;
-        System.out.println(count);
-        if (count == 6) {
-            Object a = allTree.get("C:\\test\\ff.txt");
-            System.out.println("哈哈哈");
-            System.out.println(a);
+        allTree.insertOrUpdate(file.getName(), file);
+        count0++;
+        if (count0 == 2) {
+            System.out.println("ii");
         }
     }
 
@@ -74,6 +73,11 @@ public class FileListener extends FileAlterationListenerAdaptor {
      */
     public void onDirectoryCreate(File directory) {
         log.info("[新建]:" + directory.getAbsolutePath());
+        allTree.insertOrUpdate(directory.getAbsolutePath(), directory);
+        count1++;
+        if (count1 == 2) {
+            System.out.println("ii");
+        }
     }
 
     /**

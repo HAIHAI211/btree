@@ -6,7 +6,11 @@ import org.apache.commons.io.filefilter.IOFileFilter;
 
 public class Common {
 
-    private static final String[] filterName = new String[] {"txt","doc","docx","xls","xlsx","mp4","avi","rmvb","wmv","mp3","ncm"}; // 11
+    private static final String[] filterName = new String[] {"txt","doc","docx",
+            "xls","xlsx","mp4","avi",
+            "rmvb","wmv","mp3","ncm",
+            "ppt","pptx","js","html",
+            "css","json","png","jpg"}; // 11
 
     public static IOFileFilter getFilter () {
         IOFileFilter directories = FileFilterUtils.and(

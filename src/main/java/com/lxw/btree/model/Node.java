@@ -22,14 +22,15 @@ public class Node {
 	protected Node next;
 
 	/** 节点的关键字 */
-	protected List<Entry<Comparable, Object>> entries;
+//	protected List<Entry<Comparable, Object>> entries;
+	protected List<Entry<Comparable, List>> entries;
 
 	/** 子节点 */
 	protected List<Node> children;
 
 	public Node(boolean isLeaf) {
 		this.isLeaf = isLeaf;
-		entries = new ArrayList<Entry<Comparable, Object>>();
+		entries = new ArrayList<Entry<Comparable, List>>();
 
 		if (!isLeaf) {
 			children = new ArrayList<Node>();
@@ -45,7 +46,7 @@ public class Node {
 
 		//如果是叶子节点
 		if (isLeaf) {
-			for (Entry<Comparable, Object> entry : entries) {
+			for (Entry<Comparable, List> entry : entries) {
 				if (entry.getKey().compareTo(key) == 0) {
 					//返回找到的对象
 					return entry.getValue();
@@ -85,7 +86,6 @@ public class Node {
 					//更新父节点
 					parent.updateInsert(tree);
 				}
-
 				//需要分裂
 			}else {
 				//分裂成左右两个节点
@@ -386,7 +386,7 @@ public class Node {
 							&& previous.getEntries().size() > 2
 							&& previous.getParent() == parent) {
 						int size = previous.getEntries().size();
-						Entry<Comparable, Object> entry = previous.getEntries().get(size - 1);
+						Entry<Comparable, List> entry = previous.getEntries().get(size - 1);
 						previous.getEntries().remove(entry);
 						//添加到首位
 						entries.add(0, entry);
@@ -396,7 +396,7 @@ public class Node {
 							&& next.getEntries().size() > tree.getOrder() / 2
 							&& next.getEntries().size() > 2
 							&& next.getParent() == parent) {
-						Entry<Comparable, Object> entry = next.getEntries().get(0);
+						Entry<Comparable, List> entry = next.getEntries().get(0);
 						next.getEntries().remove(entry);
 						//添加到末尾
 						entries.add(entry);
@@ -477,7 +477,7 @@ public class Node {
 
 	/** 判断当前节点是否包含该关键字*/
 	protected boolean contains(Comparable key) {
-		for (Entry<Comparable, Object> entry : entries) {
+		for (Entry<Comparable, List> entry : entries) {
 			if (entry.getKey().compareTo(key) == 0) {
 				return true;
 			}
@@ -487,7 +487,9 @@ public class Node {
 
 	/** 插入到当前节点的关键字中*/
 	protected void insertOrUpdate(Comparable key, Object obj){
-		Entry<Comparable, Object> entry = new SimpleEntry<Comparable, Object>(key, obj);
+		ArrayList list = new ArrayList();
+		list.add(obj);
+		Entry<Comparable, List> entry = new SimpleEntry<Comparable, List>(key, list);
 		//如果关键字列表长度为0，则直接插入
 		if (entries.size() == 0) {
 			entries.add(entry);
@@ -497,7 +499,7 @@ public class Node {
 		for (int i = 0; i < entries.size(); i++) {
 			//如果该关键字键值已存在，则更新
 			if (entries.get(i).getKey().compareTo(key) == 0) {
-				entries.get(i).setValue(obj);
+				entries.get(i).getValue().add(obj);
 				return;
 				//否则插入
 			}else if (entries.get(i).getKey().compareTo(key) > 0){
@@ -562,11 +564,11 @@ public class Node {
 		this.parent = parent;
 	}
 
-	public List<Entry<Comparable, Object>> getEntries() {
+	public List<Entry<Comparable, List>> getEntries() {
 		return entries;
 	}
 
-	public void setEntries(List<Entry<Comparable, Object>> entries) {
+	public void setEntries(List<Entry<Comparable, List>> entries) {
 		this.entries = entries;
 	}
 
