@@ -20,7 +20,7 @@ public class BFile implements BF {
         } else if (name.endsWith(".doc") || name.endsWith(".docx") || name.endsWith(".xls") ||
                 name.endsWith(".xlsx") || name.endsWith(".ppt") || name.endsWith(".pptx") || name.endsWith("txt")) {
             return FileTypeEnum.DOC.getCode();
-        } else if (name.endsWith(".mp3")) {
+        } else if (name.endsWith(".mp3") || name.endsWith("ncm")) {
             return FileTypeEnum.MUSIC.getCode();
         } else if (name.endsWith(".mp4") || name.endsWith(".avi") || name.endsWith(".rmvb") || name.endsWith("wmv")) {
             return FileTypeEnum.VIDEO.getCode();

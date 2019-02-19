@@ -1,4 +1,5 @@
 package com.lxw.btree.model;
+import java.util.List;
 import java.util.Random;
 
 public class BplusTree implements B {
@@ -37,7 +38,7 @@ public class BplusTree implements B {
 	}
 
 	@Override
-	public Object get(Comparable key) {
+	public List get(Comparable key) {
 		return root.get(key);
 	}
 

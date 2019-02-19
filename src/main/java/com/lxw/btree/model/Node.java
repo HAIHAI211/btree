@@ -42,7 +42,7 @@ public class Node {
 		this.isRoot = isRoot;
 	}
 
-	public Object get(Comparable key) {
+	public List get(Comparable key) {
 
 		//如果是叶子节点
 		if (isLeaf) {
