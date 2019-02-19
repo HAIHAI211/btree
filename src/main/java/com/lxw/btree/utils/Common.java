@@ -4,6 +4,9 @@ import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.HiddenFileFilter;
 import org.apache.commons.io.filefilter.IOFileFilter;
 
+import java.io.File;
+import java.util.*;
+
 public class Common {
 
     private static final String[] filterName = new String[] {"txt","doc","docx",
@@ -12,6 +15,9 @@ public class Common {
             "ppt","pptx","js","html",
             "css","json","png","jpg"}; // 11
 
+    /**
+    * 创建文件过滤器
+    * */
     public static IOFileFilter getFilter () {
         IOFileFilter directories = FileFilterUtils.and(
                 FileFilterUtils.directoryFileFilter(),
@@ -25,5 +31,28 @@ public class Common {
             ioFileFilters[i+1] = ioFileFilter;
         }
         return FileFilterUtils.or(ioFileFilters);
+    }
+
+    /**
+    * 遍历某个文件夹
+    * */
+    public static void lists(File file, List<String> container) {
+        if (file.isDirectory()) { // 判断是否为文件夹
+            File[] list = file.listFiles(); // 使用数组接收带有完整路径的文件夹
+            if (list != null) {
+                // 循环遍历文件
+                for (int i = 0; i < list.length; i++) {
+                    lists(list[i], container);
+                }
+            }
+        }
+        container.add(file.getAbsolutePath());
+    }
+    /**
+    * 遍历路径
+    * */
+    public static void lists(String path, List<String> container) {
+        File file = new File(path);
+        lists(file, container);
     }
 }
