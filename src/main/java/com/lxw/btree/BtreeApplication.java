@@ -34,7 +34,7 @@ public class BtreeApplication {
         // 使用过滤器
         FileAlterationObserver observer = new FileAlterationObserver(new File(rootDir), Common.getFilter());
 
-        //FileAlterationObserver observer = new FileAlterationObserver(new File(rootDir));
+        //FileAlterationObserver observer = new FileAlterationObserver(new BFile(rootDir));
         observer.addListener(new FileListener());
         //创建文件变化监听器
         FileAlterationMonitor monitor = new FileAlterationMonitor(interval, observer);

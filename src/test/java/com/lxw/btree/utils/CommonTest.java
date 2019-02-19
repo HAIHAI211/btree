@@ -1,5 +1,6 @@
 package com.lxw.btree.utils;
 
+import com.lxw.btree.model.BF;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class CommonTest {
 
     @Test
     public void lists() {
-        List<String> container = new ArrayList<>();
+        List<BF> container = new ArrayList<>();
         Common.lists("C:\\Users\\16343\\Documents",container);
         Assert.assertNotEquals(0, container.size());
     }
