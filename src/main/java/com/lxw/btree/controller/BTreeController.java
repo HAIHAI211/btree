@@ -22,9 +22,22 @@ public class BTreeController {
     private BTreeService bTreeService;
 
 
-    @GetMapping("/list")
-    public ResultVo list(String path) {
+    @GetMapping("/init")
+    public ResultVo init(String path) {
         List<BF> list = bTreeService.init(path);
         return ResultVoUtils.success(list);
     }
+
+    @GetMapping("/getDirChildren")
+    public ResultVo getDirChildren(String path) {
+        List<BF> list = bTreeService.getDirChildren(path);
+        return ResultVoUtils.success(list);
+    }
+
+    @GetMapping("/getByType")
+    public ResultVo getByType(Integer type) {
+        List<BF> list = bTreeService.getByType(type);
+        return ResultVoUtils.success(list);
+    }
+
 }

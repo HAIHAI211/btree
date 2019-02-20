@@ -13,16 +13,22 @@ import java.util.List;
 
 @Service
 public class BTreeServiceImpl implements BTreeService {
+
+    private static BplusTree pathTree;
+    private static BplusTree nameTree;
+    private static BplusTree timeTree;
+    private static BplusTree typeTree;
+
     @Override
     public List<BF> init(String path) {
         List<BF> container = new ArrayList<>();
 
         // 扫盘
         Common.lists(path,container);
-        BplusTree pathTree = new BplusTree(6);
-        BplusTree nameTree = new BplusTree(6);
-        BplusTree timeTree = new BplusTree(6);
-        BplusTree typeTree = new BplusTree(6);
+        pathTree = new BplusTree(6);
+        nameTree = new BplusTree(6);
+        timeTree = new BplusTree(6);
+        typeTree = new BplusTree(6);
         for (int i = 0; i < container.size(); i++) {
             BF bf = container.get(i);
             pathTree.insertOrUpdate(bf.getPath(), bf);
@@ -35,5 +41,15 @@ public class BTreeServiceImpl implements BTreeService {
         }
         List a = pathTree.get(path);
         return a;
+    }
+
+    @Override
+    public List<BF> getDirChildren(String path) {
+        return pathTree.get(path);
+    }
+
+    @Override
+    public List<BF> getByType(Integer type) {
+        return typeTree.get(type);
     }
 }
