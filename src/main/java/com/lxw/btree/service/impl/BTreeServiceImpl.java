@@ -14,14 +14,16 @@ import java.util.List;
 @Service
 public class BTreeServiceImpl implements BTreeService {
 
+    private static List<BF> container;
     private static BplusTree pathTree;
     private static BplusTree nameTree;
     private static BplusTree timeTree;
     private static BplusTree typeTree;
 
+
     @Override
     public List<BF> init(String path) {
-        List<BF> container = new ArrayList<>();
+        container = new ArrayList<>();
 
         // 扫盘
         Common.lists(path,container);
@@ -51,5 +53,26 @@ public class BTreeServiceImpl implements BTreeService {
     @Override
     public List<BF> getByType(Integer type) {
         return typeTree.get(type);
+    }
+
+    @Override
+    public List<BF> getByName(String name) {
+        return nameTree.get(name);
+    }
+
+    /**
+    *
+    * 模糊查询，全通配，无法使用索引，只能扫盘
+    * */
+    @Override
+    public List<BF> getByFuzzyName(String name) {
+        List<BF> result = new ArrayList<>();
+        for (int i = 0; i < container.size(); i++) {
+            BF bf = container.get(i);
+            if (bf.getName().contains(name)) {
+                result.add(bf);
+            }
+        }
+        return result;
     }
 }

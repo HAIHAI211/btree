@@ -42,6 +42,7 @@ public class Node {
 		this.isRoot = isRoot;
 	}
 
+	// 精确查询(前通配和全通配是无法使用索引的)
 	public List get(Comparable key) {
 
 		//如果是叶子节点

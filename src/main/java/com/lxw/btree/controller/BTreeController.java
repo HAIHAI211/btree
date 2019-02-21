@@ -40,4 +40,10 @@ public class BTreeController {
         return ResultVoUtils.success(list);
     }
 
+    @GetMapping("/getByName")
+    public ResultVo getByName(String name) {
+        List<BF> list = bTreeService.getByFuzzyName(name);
+        return ResultVoUtils.success(list);
+    }
+
 }

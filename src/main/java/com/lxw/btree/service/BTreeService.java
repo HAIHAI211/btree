@@ -13,4 +13,9 @@ public interface BTreeService {
 
     // 根据type获取
     List<BF> getByType(Integer type);
+
+    // 根据name获取(精确查询)
+    List<BF> getByName(String name);
+
+    List<BF> getByFuzzyName(String name);
 }
