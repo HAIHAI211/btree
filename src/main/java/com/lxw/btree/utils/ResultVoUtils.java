@@ -1,7 +1,6 @@
 package com.lxw.btree.utils;
 
 
-import com.lxw.btree.enums.ResultEnum;
 import com.lxw.btree.vo.ResultVo;
 
 public class ResultVoUtils {
@@ -22,8 +21,5 @@ public class ResultVoUtils {
         resultVo.setCode(code);
         resultVo.setMsg(msg);
         return resultVo;
-    }
-    public static ResultVo error(ResultEnum resultEnum) {
-        return error(resultEnum.getCode(), resultEnum.getMessage());
     }
 }
