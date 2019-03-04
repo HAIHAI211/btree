@@ -46,4 +46,10 @@ public class BTreeController {
         return ResultVoUtils.success(list);
     }
 
+    @GetMapping("/getRecent")
+    public ResultVo getRecent() {
+        List<BF> list = bTreeService.getRecent();
+        return ResultVoUtils.success(list);
+    }
+
 }

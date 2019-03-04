@@ -19,4 +19,7 @@ public interface BTreeService {
 
     // 根据name获取(模糊查询)
     List<BF> getByFuzzyName(String name);
+
+    // 获取最近文件
+    List<BF> getRecent();
 }
